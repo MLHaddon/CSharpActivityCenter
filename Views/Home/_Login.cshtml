@@ -1,0 +1,19 @@
+﻿@model LoginUser
+<div class="container">
+  <div class="d-flex flex-column justify-content-end">
+    <form action="/auth" method="post">
+      <h1>Login</h1>
+      <div class="form-group">
+        <label asp-for="LoginEmail" class="d-flex justify-self-end"></label>
+        <span class="text-danger" asp-validation-for="LoginEmail"></span>
+        <input type="email" asp-for="LoginEmail" class="form-control d-flex justify-self-end">
+      </div>
+      <div class="form-group">
+        <label asp-for="LoginPassword" class="d-flex justify-self-end"></label>
+        <span  class="text-danger" asp-validation-for="LoginPassword"></span>
+        <input type="password" asp-for="LoginPassword" class="form-control d-flex justify-self-end">
+      </div>
+      <input type="submit" value="login" class="btn-warning btn-dark">
+    </form>
+  </div>
+</div>

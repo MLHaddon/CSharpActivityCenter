@@ -1,0 +1,39 @@
+@model DojoActivity
+<div class="container-fluid">
+  <div class="d-flex flex-row justify-content-between align-items-center">
+    <h2 class="m-2">@Model.Name</h2>
+    @if (ViewBag.LoggedUser != @Model.Coordinator)
+    {
+      int count = 0;
+      foreach (Association P in ViewBag.Participants)
+      {
+        if (ViewBag.LoggedUser == P.Participant)
+        {
+          count++;
+        }
+      }
+      if (count >= 1)
+      {
+        <form action="/DojoActivities/@Model.DojoActivityId/UnRSVP" method="post"><button type="submit" class="btn btn-danger">Un-RSVP</button></form>
+      }
+      else
+      {
+        <form action="/DojoActivities/@Model.DojoActivityId/RSVP" method="post"><button type="submit" class="btn btn-success">RSVP</button></form>
+      }
+    }
+    else
+    {
+      <form action="/DojoActivities/@Model.DojoActivityId/Delete" method="post"><button type="submit" class="btn btn-danger">Delete</button></form>
+    }
+  </div>
+  <div>Event Coordinator: @Model.Coordinator.FirstName</div>
+  <div>Description</div>
+  <p>@Model.Description</p>
+  <ul class="list list-unstyled">
+    <div>Participants</div>
+    @foreach (Association P in ViewBag.Participants)
+    {
+      <li>@P.Participant.FirstName</li>
+    }
+  </ul>
+</div>

@@ -1,0 +1,14 @@
+@model User
+<div class="container">
+  <header>
+    <a href="/logout">Logout</a>
+  </header>
+  <div class="container-fluid">
+    <h1>Success</h1>
+    <ul class="list-unstyled">
+      <h4>User Profile</h4>
+      <li>@Model.FullName()</li>
+      <li>Email: @Model.Email</li>
+    </ul>
+  </div>
+</div>

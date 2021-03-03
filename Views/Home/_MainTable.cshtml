@@ -1,0 +1,149 @@
+
+<table class="table table-bordered">
+  <thead class="thead thead-dark">
+  <tr>
+      <th>Activity</th>
+      <th>Date & Time</th>
+      <th>Duration</th>
+      <th>Event Coordinator</th>
+      <th>No. of Participants</th>
+      <th>Actions</th>
+  </tr>
+  </thead>
+  <tbody>
+    @foreach (DojoActivity dojoevent in Model)
+    {
+      if (dojoevent.IsArchived == false)
+      {
+        <tr>
+          <td><a href="/DojoActivities/@dojoevent.DojoActivityId">@dojoevent.Name</a></td>
+          <td>@dojoevent.DateAndTime</td>
+          <td>@dojoevent.Duration</td>
+          <td>@dojoevent.Coordinator.FirstName</td>
+          <td>@dojoevent.Participants.Count</td>
+          @{int count = 0;}
+          @if (dojoevent.Coordinator.UserId != ViewBag.LoggedUser.UserId)
+          {
+            @foreach (Association a in dojoevent.Participants)
+            {
+                
+              
+              if (a.ParticipantId == ViewBag.LoggedUser.UserId)
+              {
+                count++;
+              }
+            }
+            if (count >= 1)
+            {
+              <td><form action="/DojoActivities/@dojoevent.DojoActivityId/UnRSVP" method="post"><button type="submit" class="btn btn-danger">Un-RSVP</button></form></td>
+            }
+            else
+            {
+              <td><form action="/DojoActivities/@dojoevent.DojoActivityId/RSVP" method="post"><button type="submit" class="btn btn-success">RSVP</button></form></td>
+            }
+          }
+          else
+          {
+            <td><form action="/DojoActivities/@dojoevent.DojoActivityId/Delete" method="post"><button type="submit" class="btn btn-danger">Delete</button></form></td>
+          }
+        </tr>
+      }
+    }
+  </tbody>
+</table>
+<form action="/DojoActivities/AddNewActivity" method="post"><button type="submit" class="btn btn-success">Add a new Activity</button></form>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  @* <tbody>
+  @foreach ( in Model)
+  {
+      <tr>
+      <td><a href="/Weddings/@wedding.WeddingID">@wedding.WedderOne & @wedding.WedderTwo</a></td>
+      <td>@wedding.Date</td>
+      <td>@wedding.Guests.Count</td>
+      @if (wedding.Owner != ViewBag.User)
+      {
+          int count = 0;
+          @foreach (ManyToMany guest in wedding.Guests)
+          {
+          if (guest.User == ViewBag.User)
+          {
+              count++;
+          }
+          }
+          if (count == 0)
+          {
+          <td><form action="/Weddings/@wedding.WeddingID/RSVP" method="post">
+                  <button type="submit" class="btn btn-success">RSVP</button>
+                  </form></td>
+          }
+          else
+          {
+          <td><form action="/Weddings/@wedding.WeddingID/UNRSVP" method="post">
+                  <button type="submit" class="btn btn-danger">Un-RSVP</button>
+                  </form></td>
+          }
+      }
+      else
+      {
+          <td><form action="/Weddings/@wedding.WeddingID/Delete" method="post">
+              <button type="submit" class="btn btn-danger">Delete</button>
+              </form></td>
+      }
+      </tr>
+  }
+  </tbody>
+</table> *@

@@ -1,0 +1,28 @@
+@model DojoActivity
+<div class="container-fluid">
+  <h1>Add a New Activity</h1>
+  <form action="/Activities/AddNewActivity/Auth" method="post">
+    <div class="rounded p-2 bg-info">
+      <input type="text" asp-for="Name" class="form-control" placeholder="Title:">
+      <span class="text-danger" asp-validation-for="Name"></span>
+
+      <input type="datetime-local" asp-for="DateAndTime" class="form-control" placeholder="Date & Time:">
+      <span class="text-danger" asp-validation-for="DateAndTime"></span>
+
+      <input type="text" asp-for="Duration" class="form-control" placeholder="Duration">
+      <span class="text-danger" asp-validation-for="Duration"></span>
+
+      <textarea 
+      type="text"
+      asp-for="Description" 
+      placeholder="Description"
+      class="rounded rounded-1"
+      style="height: 75px; width: 100%; overflow: hidden; overflow-wrap: break-word; resize: none;"
+      id="textarea"></textarea>
+      <span class="text-danger" asp-validation-for="Description"></span>
+
+      <input type="hidden" asp-for="Coordinator" value="@ViewBag.User">
+    </div>
+    <button type="submit" class="btn btn-success">Create Activity</button>
+  </form>
+</div>
