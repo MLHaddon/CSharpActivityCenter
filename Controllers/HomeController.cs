@@ -32,6 +32,11 @@ namespace ExamProject.Controllers
             return RedirectToAction("Dashboard");
         }
 
+        public IActionResult Privacy()
+        {
+            return View();
+        }
+
         [HttpPost("register")]
         public IActionResult RegisterUser(User user)
         {
